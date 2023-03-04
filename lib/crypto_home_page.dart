@@ -1,7 +1,7 @@
+import 'package:defi/constants/constants.dart';
 import 'package:defi/models/Cryptocurrency.dart';
 import 'package:defi/providers/market_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CryptoHomePage extends StatefulWidget {
   const CryptoHomePage({super.key});
@@ -14,57 +14,107 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Welcome Back",
-                style: TextStyle(
-                  fontSize: 18,
+                style: whiteColorStyle(18).copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 "Crypto Today",
-                style: TextStyle(
+                style: whiteColorStyle(18).copyWith(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Expanded(
-                child: Consumer<MarketProvider>(
-                  builder: (context, marketProvider, child) {
-                    if (marketProvider.isLoading == true) {
-                      return Center(
+                child: FutureBuilder<List>(
+                  future: MarketProvider().fetchData(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else {
-                      if (marketProvider.markets.length > 0) {
-                        return ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: marketProvider.markets.length,
-                          itemBuilder: (context, index) {
-                            CryptoCurrency currentCrypto =
-                                marketProvider.markets[index];
-                            return ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                backgroundImage:
-                                    NetworkImage(currentCrypto.image!),
-                              ),
-                              title: Text(currentCrypto.name!),
-                            );
-                          },
-                        );
-                      } else {
-                        return Text("Data not found");
-                      }
+                      // if (snapshot.markets.length > 0) {
+                      return ListView.builder(
+                        physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics(),
+                        ),
+                        itemCount: snapshot.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          CryptoCurrency currentCrypto = snapshot.data?[index];
+                          return ListTile(
+                            contentPadding: const EdgeInsets.all(0),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              backgroundImage:
+                                  NetworkImage(currentCrypto.image!),
+                            ),
+                            title: Text(currentCrypto.name!),
+                            subtitle: Text(
+                              currentCrypto.symbol!.toUpperCase(),
+                            ),
+                            trailing: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "₹ ${currentCrypto.currentPrice!.toStringAsFixed(2)}",
+                                  style: const TextStyle(
+                                    color: Color(0xff0395eb),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Builder(
+                                  builder: (context) {
+                                    double pricechange =
+                                        currentCrypto.priceChange24h!;
+                                    double pricechangePercentage =
+                                        currentCrypto.priceChangePercentage24h!;
+                                    if (pricechange < 0) {
+                                      //-ve
+                                      return Text(
+                                        "${pricechangePercentage.toStringAsFixed(2)}%(${pricechange.toStringAsFixed(2)})",
+                                        style:
+                                            const TextStyle(color: Colors.red),
+                                      );
+                                    } else {
+                                      //+ve
+                                      return Text(
+                                        "+${pricechangePercentage.toStringAsFixed(2)}%(+${pricechange.toStringAsFixed(2)})",
+                                        style: const TextStyle(
+                                          color: Colors.green,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                      // } else {
+                      // return const Text("Data not found");
+                      // }
                     }
                   },
                 ),
+              ),
+              const SizedBox(
+                height: 96,
               ),
             ],
           ),

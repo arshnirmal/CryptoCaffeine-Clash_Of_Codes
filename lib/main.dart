@@ -1,6 +1,6 @@
 import 'package:defi/providers/market_provider.dart';
-import 'package:defi/routes/routes.dart';
 import 'package:defi/crypto_home_page.dart';
+import 'package:defi/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
           create: (context) => MarketProvider(),
         )
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: CryptoHomePage(),
+        onGenerateRoute: onGeneratedRoute,
       ),
     );
     // MaterialApp(

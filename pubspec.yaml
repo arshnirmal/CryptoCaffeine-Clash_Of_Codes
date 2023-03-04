@@ -1,7 +1,7 @@
 name: defi
 description: A new Flutter project.
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -15,9 +15,8 @@ dependencies:
   fl_chart: ^0.61.0
   http: ^0.13.5
   provider: ^6.0.5
-  cupertino_icons: ^1.0.2
-  fl_chart: ^0.61.0
   intl: ^0.18.0
+  flutter_svg: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -25,7 +24,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
   assets:
     - assets/
+    - assets/illustrations/
