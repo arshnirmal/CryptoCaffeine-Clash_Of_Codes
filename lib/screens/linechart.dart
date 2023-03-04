@@ -58,51 +58,88 @@ class _CrytoChartState extends State<CrytoChart> {
   LineChartData _mainData() {
     return LineChartData(
       gridData: _gridData(),
-      // titlesData: FlTitlesData(
-      //   bottomTitles: AxisTitles(
-      //     sideTitles: _bottomTitles(),
-      //   ),
-      //   leftTitles: AxisTitles(
-      //     sideTitles: _leftTitles(),
-      //   ),
-      // ),
-      // borderData: FlBorderData(
-      //   border: Border.all(color: Colors.white12, width: 1),
-      // ),
+      titlesData: FlTitlesData(
+        bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      ),
+      borderData: flBorderData(),
       minX: _minX,
       maxX: _maxX,
       minY: _minY,
       maxY: _maxY,
       lineBarsData: [_lineBarData()],
+      lineTouchData: lineTouchData(),
+    );
+  }
+
+  FlBorderData flBorderData() {
+    return FlBorderData(
+      show: false,
     );
   }
 
   LineChartBarData _lineBarData() {
     return LineChartBarData(
+      isCurved: false,
       spots: _values,
       dotData: FlDotData(
         show: false,
       ),
-      
     );
   }
 
   FlGridData _gridData() {
     return FlGridData(
       show: false,
-      drawVerticalLine: false,
-      getDrawingHorizontalLine: (value) {
-        return FlLine(
-          color: Colors.white,
-          strokeWidth: 1,
-        );
-      },
-      checkToShowHorizontalLine: (value) {
-        return (value - _minY) % _leftTitlesInterval == 0;
-      },
     );
   }
 
+  LineTouchData lineTouchData() {
+    return LineTouchData(
+      enabled: true,
+      touchCallback: (
+        FlTouchEvent event,
+        LineTouchResponse? touchResponse,
+      ) {},
+      touchTooltipData: LineTouchTooltipData(
+        tooltipBgColor: Colors.blue,
+        tooltipRoundedRadius: 20.0,
+        tooltipMargin: 0,
+        getTooltipItems: (touchedSpots) {
+          return touchedSpots.map(
+            (LineBarSpot touchedSpot) {
+              const textStyle = TextStyle(
+                fontSize: 10,
+                color: Colors.white,
+              );
+              return LineTooltipItem(
+                touchedSpot.y.toString(),
+                textStyle,
+              );
+            },
+          ).toList();
+        },
+      ),
+      getTouchedSpotIndicator:
+          (LineChartBarData barData, List<int> indicators) {
+        return indicators.map(
+          (int index) {
+            final line = FlLine(
+              color: Colors.grey,
+              strokeWidth: 1,
+              dashArray: [2, 4],
+            );
+            return TouchedSpotIndicatorData(
+              line,
+              FlDotData(show: false),
+            );
+          },
+        ).toList();
+      },
+    );
+  }
   // SideTitles _leftTitles() {
   //   return SideTitles(
   //     showTitles: true,
