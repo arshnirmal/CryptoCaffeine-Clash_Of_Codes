@@ -30,28 +30,5 @@ class MarketProvider with ChangeNotifier {
     markets = temp;
     isLoading = false;
     notifyListeners();
-    Timer(const Duration(seconds: 5), () {
-      fetchData();
-      print("Data Updated");
-    });
   }
-
-  // CryptoCurrency fetchCryptoById(String id) {
-  //   CryptoCurrency crypto = markets.where((element) => element.id == id).toList()[0];
-  //   return crypto;
-  // }
-
-  // void addFavorite(CryptoCurrency crypto) async {
-  //   int indexOfCrypto = markets.indexOf(crypto);
-  //   markets[indexOfCrypto].isFavorite = true;
-  //   await LocalStorage.addFavorite(crypto.id!);
-  //   notifyListeners();
-  // }
-
-  // void removeFavorite(CryptoCurrency crypto) async {
-  //   int indexOfCrypto = markets.indexOf(crypto);
-  //   markets[indexOfCrypto].isFavorite = false;
-  //   await LocalStorage.removeFavorite(crypto.id!);
-  //   notifyListeners();
-  // }
 }
