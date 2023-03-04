@@ -77,7 +77,7 @@ class _PortfolioState extends State<Portfolio> {
             const SizedBox(
               height: 16,
             ),
-            LineGraph().lineChart(context),
+            const CrytoChart()
           ],
         ),
       ),
