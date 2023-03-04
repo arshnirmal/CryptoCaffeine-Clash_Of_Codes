@@ -1,5 +1,8 @@
+import 'package:defi/providers/market_provider.dart';
 import 'package:defi/routes/routes.dart';
+import 'package:defi/crypto_home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,14 +14,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: onGeneratedRoute,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MarketProvider>(
+          create: (context) => MarketProvider(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: CryptoHomePage(),
       ),
-      debugShowCheckedModeBanner: false,
     );
+    // MaterialApp(
+    //   onGenerateRoute: onGeneratedRoute,
+    //   title: 'Flutter Demo',
+    //   theme: ThemeData(
+    //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    //     useMaterial3: true,
+    //   ),
+    //   debugShowCheckedModeBanner: false,
+    // );
   }
 }
