@@ -1,71 +1,17 @@
-// class CryptoCurrency {
-//   String? id;
-//   String? symbol;
-//   String? name;
-//   String? image;
-//   // double? currentPrice;
-//   // double? marketCap;
-//   // int? marketCapRank;
-//   // double? high24;
-//   // double? low24;
-//   // double? priceChange24;
-//   // double? priceChangePercentage24;
-//   // double? circulatingSupply;
-//   // double? ath;
-//   // double? atl;
-//   // bool isFavorite = false;
-
-//   CryptoCurrency({
-//     required this.id,
-//     required this.symbol,
-//     required this.name,
-//     required this.image,
-//     // required this.currentPrice,
-//     // required this.marketCap,
-//     // required this.marketCapRank,
-//     // required this.high24,
-//     // required this.low24,
-//     // required this.priceChange24,
-//     // required this.priceChangePercentage24,
-//     // required this.circulatingSupply,
-//     // required this.ath,
-//     // required this.atl
-//   });
-
-//   factory CryptoCurrency.fromJSON(Map<String, dynamic> map) {
-//     return CryptoCurrency(
-//       id: map["id"],
-//       symbol: map["symbol"],
-//       name: map["name"],
-//       image: map["image"],
-//       // currentPrice: double.parse(map["current_price"].toString()),
-//       // marketCap: double.parse(map["market_cap"].toString()),
-//       // marketCapRank: map["market_cap_rank"],
-//       // high24: double.parse(map["high_24h"].toString()),
-//       // low24: double.parse(map["low_24h"].toString()),
-//       // priceChange24: double.parse(map["price_change_24h"].toString()),
-//       // priceChangePercentage24:
-//       //     double.parse(map["price_change_percentage_24h"].toString()),
-//       // circulatingSupply: double.parse(map["circulating_supply"].toString()),
-//       // ath: double.parse(map["ath"].toString()),
-//       // atl: double.parse(map["atl"].toString())
-//     );
-//   }
-// }
 class CryptoCurrency {
   String? id;
   String? symbol;
   String? name;
   String? image;
-  // int? currentPrice;
+  double? currentPrice;
   // int? marketCap;
-  // int? marketCapRank;
+  double? marketCapRank;
   // int? fullyDilutedValuation;
   // int? totalVolume;
   // int? high24h;
   // int? low24h;
-  // double? priceChange24h;
-  // double? priceChangePercentage24h;
+  double? priceChange24h;
+  double? priceChangePercentage24h;
   // double? marketCapChange24h;
   // double? marketCapChangePercentage24h;
   // int? circulatingSupply;
@@ -85,15 +31,15 @@ class CryptoCurrency {
     required this.symbol,
     required this.name,
     required this.image,
-    // required this.currentPrice,
+    required this.currentPrice,
     // required this.marketCap,
-    // required this.marketCapRank,
+    required this.marketCapRank,
     // required this.fullyDilutedValuation,
     // required this.totalVolume,
     // required this.high24h,
     // required this.low24h,
-    // required this.priceChange24h,
-    // required this.priceChangePercentage24h,
+    required this.priceChange24h,
+    required this.priceChangePercentage24h,
     // required this.marketCapChange24h,
     // required this.marketCapChangePercentage24h,
     // required this.circulatingSupply,
@@ -114,15 +60,16 @@ class CryptoCurrency {
     symbol = json['symbol'];
     name = json['name'];
     image = json['image'];
-    // currentPrice = json['current_price'];
+    currentPrice = double.parse(json['current_price'].toString());
     // marketCap = json['market_cap'];
-    // marketCapRank = json['market_cap_rank'];
+    marketCapRank = double.parse(['market_cap_rank'].toString());
     // fullyDilutedValuation = json['fully_diluted_valuation'];
     // totalVolume = json['total_volume'];
     // high24h = json['high_24h'];
     // low24h = json['low_24h'];
-    // priceChange24h = json['price_change_24h'];
-    // priceChangePercentage24h = json['price_change_percentage_24h'];
+    priceChange24h = double.parse(json['price_change_24h'].toString());
+    priceChangePercentage24h =
+        double.parse(json['price_change_percentage_24h'].toString());
     // marketCapChange24h = json['market_cap_change_24h'];
     // marketCapChangePercentage24h = json['market_cap_change_percentage_24h'];
     // circulatingSupply = json['circulating_supply'];
@@ -146,13 +93,13 @@ class CryptoCurrency {
     data['image'] = this.image;
     // data['current_price'] = this.currentPrice;
     // data['market_cap'] = this.marketCap;
-    // data['market_cap_rank'] = this.marketCapRank;
+    data['market_cap_rank'] = this.marketCapRank;
     // data['fully_diluted_valuation'] = this.fullyDilutedValuation;
     // data['total_volume'] = this.totalVolume;
     // data['high_24h'] = this.high24h;
     // data['low_24h'] = this.low24h;
-    // data['price_change_24h'] = this.priceChange24h;
-    // data['price_change_percentage_24h'] = this.priceChangePercentage24h;
+    data['price_change_24h'] = this.priceChange24h;
+    data['price_change_percentage_24h'] = this.priceChangePercentage24h;
     // data['market_cap_change_24h'] = this.marketCapChange24h;
     // data['market_cap_change_percentage_24h'] =
     //     this.marketCapChangePercentage24h;

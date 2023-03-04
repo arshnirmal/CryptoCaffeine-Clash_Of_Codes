@@ -30,6 +30,10 @@ class MarketProvider with ChangeNotifier {
     markets = temp;
     isLoading = false;
     notifyListeners();
+    Timer(const Duration(seconds: 5), () {
+      fetchData();
+      print("Data Updated");
+    });
   }
 
   // CryptoCurrency fetchCryptoById(String id) {

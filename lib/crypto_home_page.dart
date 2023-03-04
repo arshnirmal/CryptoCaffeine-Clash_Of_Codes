@@ -34,6 +34,9 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: Consumer<MarketProvider>(
                   builder: (context, marketProvider, child) {
@@ -44,18 +47,67 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
                     } else {
                       if (marketProvider.markets.length > 0) {
                         return ListView.builder(
-                          physics: BouncingScrollPhysics(),
+                          physics: BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics(),
+                          ),
                           itemCount: marketProvider.markets.length,
                           itemBuilder: (context, index) {
                             CryptoCurrency currentCrypto =
                                 marketProvider.markets[index];
                             return ListTile(
+                              contentPadding: EdgeInsets.all(0),
                               leading: CircleAvatar(
                                 backgroundColor: Colors.white,
                                 backgroundImage:
                                     NetworkImage(currentCrypto.image!),
                               ),
-                              title: Text(currentCrypto.name!),
+                              title: Text(currentCrypto.name!
+                                  // "#" +
+                                  // "${currentCrypto.marketCapRank!}"
+                                  ),
+                              subtitle: Text(
+                                currentCrypto.symbol!.toUpperCase(),
+                              ),
+                              trailing: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "₹ " +
+                                        currentCrypto.currentPrice!
+                                            .toStringAsFixed(2),
+                                    style: TextStyle(
+                                      color: Color(0xff0395eb),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Builder(
+                                    builder: (context) {
+                                      double pricechange =
+                                          currentCrypto.priceChange24h!;
+                                      double pricechangePercentage =
+                                          currentCrypto
+                                              .priceChangePercentage24h!;
+                                      if (pricechange < 0) {
+                                        //-ve
+                                        return Text(
+                                          "${pricechangePercentage.toStringAsFixed(2)}%(${pricechange.toStringAsFixed(2)})",
+                                          style: TextStyle(color: Colors.red),
+                                        );
+                                      } else {
+                                        //+ve
+                                        return Text(
+                                          "+${pricechangePercentage.toStringAsFixed(2)}%(+${pricechange.toStringAsFixed(2)})",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         );
