@@ -7,9 +7,9 @@ class MarketProvider with ChangeNotifier {
   bool isLoading = true;
   List<CryptoCurrency> markets = [];
 
-  // MarketProvider() {
-  //   fetchData();
-  // }
+  MarketProvider() {
+    fetchData();
+  }
 
   Future<List> fetchData() async {
     List<dynamic> markets = await API.getMarkets();
@@ -26,9 +26,6 @@ class MarketProvider with ChangeNotifier {
 
     markets = temp;
     isLoading = false;
-    Timer(const Duration(seconds: 5), () {
-      fetchData();
-    });
     return markets;
   }
 }

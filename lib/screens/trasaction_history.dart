@@ -1,13 +1,31 @@
+import 'package:defi/models/Cryptocurrency.dart';
+import 'package:defi/providers/market_provider.dart';
 import 'package:flutter/material.dart';
 
 class TransactionHistory extends StatefulWidget {
-  const TransactionHistory({super.key});
-
+  TransactionHistory(
+      {super.key,
+      required this.currency,
+      required this.amount,
+      required this.status});
+  String currency;
+  double amount;
+  String status;
   @override
   State<TransactionHistory> createState() => _TransactionHistoryState();
 }
 
 class _TransactionHistoryState extends State<TransactionHistory> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // MarketProvider().fetchData().then(
+    //       (value) => value.contains(widget.currency),
+    //     );
+  }
+
+  String dataa = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,14 +40,14 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "AVAX->XTZ",
+                    widget.currency,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
                     ),
                   ),
                   Text(
-                    "Buy",
+                    widget.status,
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -69,7 +87,10 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Total"),
-                      Text("XTZ 64.2213"),
+                      // Text("XTZ 64.2213"),
+                      Text(widget.currency +
+                          " " +
+                          (widget.amount + 0.0733).toStringAsFixed(2))
                     ],
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:defi/screens/trasaction_history.dart';
 import 'package:flutter/material.dart';
 
 class LenderBorrower extends StatefulWidget {
@@ -67,7 +68,11 @@ class _LenderBorrowerState extends State<LenderBorrower>
           ),
           Container(
             color: Colors.black,
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.only(
+              top: 15,
+              right: 15,
+              left: 15,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -129,6 +134,9 @@ class _LenderBorrowerState extends State<LenderBorrower>
 
 class LenderBorrowerList extends StatelessWidget {
   List children;
+  String currency = "BTC";
+  double amount = 4.25;
+  String status = "Buy";
   LenderBorrowerList({super.key, required this.children});
 
   @override
@@ -137,49 +145,60 @@ class LenderBorrowerList extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       itemCount: 15,
       itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.black,
-          ),
-          padding: EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: /*children*/ [
-                  Text(
-                    "XTZ->AVAX",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    "1:18",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+        return ListTile(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TransactionHistory(
+                    amount: amount, currency: currency, status: status),
               ),
-              Column(
-                children: [
-                  Text(
-                    "4.2516",
-                    style: TextStyle(
-                      color: Colors.white,
+            );
+          },
+          title: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.black,
+            ),
+            padding: EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: /*children*/ [
+                    Text(
+                      currency,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Buy",
-                    style: TextStyle(
-                      color: Colors.white,
+                    Text(
+                      "1:18",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      amount.toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      status,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         );
       },

@@ -34,8 +34,29 @@ class CryptoCurrency {
     data['symbol'] = this.symbol;
     data['name'] = this.name;
     data['image'] = this.image;
+    data['current_price'] = this.currentPrice;
+    // data['market_cap'] = this.marketCap;
+    // data['market_cap_rank'] = this.marketCapRank;
+    // data['fully_diluted_valuation'] = this.fullyDilutedValuation;
+    // data['total_volume'] = this.totalVolume;
+    // data['high_24h'] = this.high24h;
+    // data['low_24h'] = this.low24h;
     data['price_change_24h'] = this.priceChange24h;
     data['price_change_percentage_24h'] = this.priceChangePercentage24h;
+    // data['market_cap_change_24h'] = this.marketCapChange24h;
+    // data['market_cap_change_percentage_24h'] =
+    //     this.marketCapChangePercentage24h;
+    // data['circulating_supply'] = this.circulatingSupply;
+    // data['total_supply'] = this.totalSupply;
+    // data['max_supply'] = this.maxSupply;
+    // data['ath'] = this.ath;
+    // data['ath_change_percentage'] = this.athChangePercentage;
+    // data['ath_date'] = this.athDate;
+    // data['atl'] = this.atl;
+    // data['atl_change_percentage'] = this.atlChangePercentage;
+    // data['atl_date'] = this.atlDate;
+    // data['roi'] = this.roi;
+    // data['last_updated'] = this.lastUpdated;
     return data;
   }
 }
