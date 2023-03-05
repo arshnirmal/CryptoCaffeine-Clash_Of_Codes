@@ -1,6 +1,5 @@
 import 'package:defi/crypto_home_page.dart';
-import 'package:defi/providers/market_provider.dart';
-import 'package:defi/screens/homepage%20(1).dart';
+import 'package:defi/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +38,6 @@ class _FragmentState extends State<Fragment>
   ];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: listOfScreens.length, vsync: this);
   }
