@@ -4,7 +4,6 @@ import 'package:defi/screens/trade_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../constants/constants.dart';
 import '../constants/mediaQueryConstants.dart';
 
@@ -116,6 +115,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       body: Container(
         child: SafeArea(
           child: ListView(
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(
@@ -163,6 +164,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     Text(
                       "Welcome to TheFi",
                       style: whiteColorStyle(64.0).copyWith(
+                        fontWeight: FontWeight.w900,
                         fontWeight: FontWeight.bold,
                         fontFamily: GoogleFonts.poppins().fontFamily,
                         letterSpacing: 1.0,
@@ -312,6 +314,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                             Text(
                                               listOfCrypto[
                                                   listOfCrypto.indexOf(e)][2],
+                                              style: TextStyle(
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -328,7 +331,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            Container(
+                                            Container
                                               padding: const EdgeInsets.only(
                                                   left: 4.0),
                                               alignment: Alignment.bottomLeft,
@@ -403,6 +406,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                       ),
                     ),
                     const SizedBox(height: 16.0),
+                    Container(
                     SizedBox(
                       height: 0.35 * heightFunc(context),
                       child: GridView.count(
@@ -431,7 +435,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
               ),
               const SizedBox(
                 height: 8.0,
-              ),
+              ),             
               const SizedBox(
                 height: 96,
               )

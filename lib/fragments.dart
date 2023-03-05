@@ -1,4 +1,5 @@
 import 'package:defi/crypto_home_page.dart';
+import 'package:defi/providers/market_provider.dart';
 import 'package:defi/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
