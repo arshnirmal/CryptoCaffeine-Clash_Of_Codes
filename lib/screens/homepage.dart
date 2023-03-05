@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:defi/screens/trade_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../constants/constants.dart';
 import '../constants/mediaQueryConstants.dart';
 
@@ -25,7 +25,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     ['assets/illustrations/ethereum_logo.svg', 'Ethereum', 'BTC'],
     ['assets/illustrations/shiba_logo.svg', 'Shiba Inu', 'BTC'],
     ['assets/illustrations/solana_logo.svg', 'Solana', 'BTC'],
-    ['assets/illustrations/binance_logo.svg', 'Binance Coin', 'BTC'],
+    ['assets/illustrations/binance_logo.svg', 'Binance', 'BTC'],
     ['assets/illustrations/bitcoin_logo.svg', 'Bitcoin', 'BTC'],
     ['assets/illustrations/ethereum_logo.svg', 'Ethereum', 'BTC'],
     ['assets/illustrations/shiba_logo.svg', 'Shiba Inu', 'BTC'],
@@ -65,14 +65,14 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   late Timer timer;
   late ScrollController scrollController;
   int index = 0;
-  Tween<Offset> offset = Tween(begin: Offset(0.0, 0.0), end: Offset(0.0, 0.08));
+  Tween<Offset> offset =
+      Tween(begin: const Offset(0.0, 0.0), end: const Offset(0.0, 0.08));
   late AnimationController animationController;
   @override
   void initState() {
     animationController =
-        AnimationController(duration: Duration(seconds: 3), vsync: this)
+        AnimationController(duration: const Duration(seconds: 3), vsync: this)
           ..repeat(reverse: true);
-    ;
     super.initState();
 
     animationController.addListener(() {
@@ -83,7 +83,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
         animationController.forward();
       }
     });
-    timer = Timer.periodic(Duration(seconds: 3), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       setState(() {
         index = index + 1;
         if (index == listOfIllustrations.length) {
@@ -158,13 +158,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16.0,
                     ),
                     Text(
                       "Welcome to TheFi",
                       style: whiteColorStyle(64.0).copyWith(
                         fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.poppins().fontFamily,
                         letterSpacing: 1.0,
                         wordSpacing: 1.0,
                       ),
@@ -302,7 +304,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           children: [
                                             Text(
                                               e[1],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w900,
@@ -313,6 +315,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                               listOfCrypto[
                                                   listOfCrypto.indexOf(e)][2],
                                               style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.white),
                                             ),
                                           ],
@@ -328,9 +331,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            Container(
-                                              padding:
-                                                  EdgeInsets.only(left: 4.0),
+                                            Container
+                                              padding: const EdgeInsets.only(
+                                                  left: 4.0),
                                               alignment: Alignment.bottomLeft,
                                               child: const Text(
                                                 "Rs 189566",
@@ -370,7 +373,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 24.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 24.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -404,6 +407,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                     const SizedBox(height: 16.0),
                     Container(
+                    SizedBox(
                       height: 0.35 * heightFunc(context),
                       child: GridView.count(
                         controller: scrollController,
@@ -431,8 +435,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
               ),
               const SizedBox(
                 height: 8.0,
-              ),
-              SizedBox(
+              ),             
+              const SizedBox(
                 height: 96,
               )
             ],

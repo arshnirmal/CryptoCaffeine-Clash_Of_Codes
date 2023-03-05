@@ -39,7 +39,6 @@ class _FragmentState extends State<Fragment>
   ];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: listOfScreens.length, vsync: this);
   }
