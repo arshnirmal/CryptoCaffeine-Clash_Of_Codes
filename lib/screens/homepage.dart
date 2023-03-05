@@ -115,6 +115,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       body: Container(
         child: SafeArea(
           child: ListView(
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(

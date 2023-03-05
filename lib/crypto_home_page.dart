@@ -61,9 +61,17 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
                               backgroundImage:
                                   NetworkImage(currentCrypto.image!),
                             ),
-                            title: Text(currentCrypto.name!),
+                            title: Text(
+                              currentCrypto.name!,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                             subtitle: Text(
                               currentCrypto.symbol!.toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
                             trailing: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
