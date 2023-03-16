@@ -1,5 +1,5 @@
 # defi
-
+Implemented coingecko API for fetching real time data of crypto currensies.
 A new Flutter project.
 
 ## Getting Started
